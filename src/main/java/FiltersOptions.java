@@ -35,4 +35,17 @@ public class FiltersOptions {
         }
     }
 
+    public void colorShiftRightFilter() {
+        for (int x = 0; x < width; x++) { // יצירת צבע חדש מהצבעים שנמצאים בפיקסל
+            for (int y = 0; y < height; y++) {
+                int currentRgb = bufferedImage.getRGB(x, y);
+                Color currentColor = new Color(currentRgb);
+                int currentRed = currentColor.getRed();
+                int currentGreen = currentColor.getGreen();
+                int currentBlue = currentColor.getBlue();
+                Color newColor = new Color(currentGreen, currentBlue, currentRed);
+                bufferedImage.setRGB(x, y, newColor.getRGB());
+            }
+        }
+    }
 }

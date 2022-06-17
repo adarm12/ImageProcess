@@ -21,7 +21,6 @@ public class CreateNew {
         return textField;
     }
 
-
     public static JButton newButton(String text, int x, int y, int width, int height) {
         JButton button = new JButton(text);
         button.setBounds(x, y, width, height);

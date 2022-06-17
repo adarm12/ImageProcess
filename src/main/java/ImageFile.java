@@ -16,9 +16,19 @@ public class ImageFile {
             e.printStackTrace();
         }
     }
+//
+//    public BufferedImage outputImage() {
+//        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
+//        try {
+//            ImageIO.write(bufferedImage, "jpg", output);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//    }
 
     public ImageIcon getImage() {
         ImageIcon image = new ImageIcon(FILE.getPath());
-return image;
+        return image;
     }
 }
