@@ -36,7 +36,7 @@ public class FiltersOptions {
     }
 
     public void colorShiftRightFilter() {
-        for (int x = 0; x < width; x++) { // יצירת צבע חדש מהצבעים שנמצאים בפיקסל
+        for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int currentRgb = bufferedImage.getRGB(x, y);
                 Color currentColor = new Color(currentRgb);
