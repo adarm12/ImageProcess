@@ -11,6 +11,7 @@ public class Main extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.setTitle("Image Process By Adar & Shanit");
 
         this.add(new FilterBoard(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT));
 

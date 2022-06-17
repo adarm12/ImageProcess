@@ -1,5 +1,6 @@
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,7 +18,6 @@ public class FiltersOptions {
         this.width = this.bufferedImage.getWidth();
         this.height = this.bufferedImage.getHeight();
     }
-
 
     public void GrayscaleFilter() {
         this.width = this.bufferedImage.getWidth();
