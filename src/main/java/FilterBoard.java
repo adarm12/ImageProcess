@@ -21,7 +21,7 @@ public class FilterBoard extends JPanel {
     private JButton searchButton;
     private JButton grayscale, colorShiftRight, colorShiftLeft;
     private JButton showBorders;
-    private JButton sepia;
+    private JButton mirror;
 
 
     public FilterBoard(int x, int y, int width, int height) {
@@ -37,29 +37,39 @@ public class FilterBoard extends JPanel {
 
     public void a() {
         Thread thread = new Thread(() -> {
-            while (true) {
-                this.grayscale.addActionListener((event) -> {
-                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
-                    save();
-                });
-                this.colorShiftLeft.addActionListener((event) -> {
-                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftLeftFilter();
-                    save();
-                });
-                this.colorShiftRight.addActionListener((event) -> {
-                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
-                    save();
-                });
+//            while (true) {
+            this.grayscale.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
                 repaint();
-            }
+                save();
+            });
+            this.colorShiftLeft.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftLeftFilter();
+                repaint();
+                save();
+            });
+            this.colorShiftRight.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
+                repaint();
+                save();
+            });
+            this.mirror.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).mirror();
+                repaint();
+                save();
+            });
+//            }
         });
         thread.start();
-
-
     }
 
     public void save() {
-        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
+//        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
+        File output = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\output.jpg");
         try {
             ImageIO.write(imageLabelAfter, "jpg", output);
         } catch (IOException e) {
@@ -81,8 +91,8 @@ public class FilterBoard extends JPanel {
         this.add(this.showBorders);
         this.grayscale = CreateNew.newButton("grayscale", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.showBorders.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.grayscale);
-        this.sepia = CreateNew.newButton("Sepia", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
-        this.add(this.sepia);
+        this.mirror = CreateNew.newButton("mirror", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.add(this.mirror);
     }
 
     public void paintComponent(Graphics graphics) {
