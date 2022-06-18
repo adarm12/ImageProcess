@@ -19,6 +19,7 @@ public class FilterBoard extends JPanel {
     public static final int BUTTON_HEIGHT = 50;
 
     public static final String WEB = "https://www.facebook.com/oshrikarmni";
+
     private JLabel imageLabelBefore;
     private JLabel imageLabelAfter;
     private JTextField searchTextField;
