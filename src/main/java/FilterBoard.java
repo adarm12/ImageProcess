@@ -1,6 +1,7 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
@@ -35,11 +36,35 @@ public class FilterBoard extends JPanel {
     }
 
     public void a() {
-        this.grayscale.addActionListener((event) -> {
-            this.imageLabelAfter = new FiltersOptions(this.imageLabelBefore).GrayscaleFilter();
-            new ImageFile().outputImage();
-
+        Thread thread = new Thread(() -> {
+            while (true) {
+                this.grayscale.addActionListener((event) -> {
+                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
+                    save();
+                });
+                this.colorShiftLeft.addActionListener((event) -> {
+                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftLeftFilter();
+                    save();
+                });
+                this.colorShiftRight.addActionListener((event) -> {
+                    this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
+                    save();
+                });
+                repaint();
+            }
         });
+        thread.start();
+
+
+    }
+
+    public void save() {
+        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
+        try {
+            ImageIO.write(imageLabelAfter, "jpg", output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -58,8 +83,6 @@ public class FilterBoard extends JPanel {
         this.add(this.grayscale);
         this.sepia = CreateNew.newButton("Sepia", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.sepia);
-
-
     }
 
     public void paintComponent(Graphics graphics) {
