@@ -60,21 +60,6 @@ public class FiltersOptions {
         return this.bufferedImageOrigin;
     }
 
-//    public BufferedImage sepia() {
-//        for (int i = 0; i < height; i++) {
-//            for (int j = 0; j < width; j++) {
-//                Color currentColor = new Color(this.bufferedImageOrigin.getRGB(j, i));
-//                int red = (int) (currentColor.getRed() * 0.2126);
-//                int green = (int) (currentColor.getGreen() * 0.7152);
-//                int blue = (int) (currentColor.getBlue() * 0.0722);
-//                Color newColor = new Color(red + green + blue,
-//                        red + green + blue, red + green + blue);
-//                this.bufferedImageOrigin.setRGB(j, i, newColor.getRGB());
-//            }
-//        }
-//        return this.bufferedImageOrigin;
-//    }
-
     public BufferedImage mirror() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -123,6 +108,5 @@ public class FiltersOptions {
         }
         return this.bufferedImageOrigin;
     }
-
 
 }

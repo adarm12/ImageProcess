@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class FilterBoard extends JPanel {
 
-    public static final int IMAGE_X = 50, IMAGE_Y = 100, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
+    public static final int IMAGE_X = 50, IMAGE_Y = 150, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
     public static final int BUTTON_Y = 150, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
     public static final int SEARCH_WIDTH = 150, SEARCH_HEIGHT = 50;
 
@@ -19,10 +19,12 @@ public class FilterBoard extends JPanel {
 
     private JTextField searchTextField;
     private JButton searchButton;
-    private JButton grayscale, colorShiftRight, colorShiftLeft;
+    private JButton grayscale;
+    private JButton colorShiftRight;
+    private JButton colorShiftLeft;
     private JButton showBorders;
     private JButton mirror;
-
+    private JButton negative;
 
     public FilterBoard(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
@@ -67,6 +69,12 @@ public class FilterBoard extends JPanel {
                 repaint();
                 save();
             });
+            this.negative.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).negativeFilter();
+                repaint();
+                save();
+            });
         });
         repaint();
         thread.start();
@@ -81,7 +89,6 @@ public class FilterBoard extends JPanel {
             e.printStackTrace();
         }
     }
-
 
     public void buttons() {
         this.searchTextField = CreateNew.newTextField(Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
@@ -98,6 +105,8 @@ public class FilterBoard extends JPanel {
         this.add(this.grayscale);
         this.mirror = CreateNew.newButton("mirror", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.mirror);
+        this.negative = CreateNew.newButton("negative", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.mirror.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.add(this.negative);
     }
 
     public void paintComponent(Graphics graphics) {
