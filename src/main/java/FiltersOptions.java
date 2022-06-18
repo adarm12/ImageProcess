@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class FiltersOptions {
 
+    public static final int MAX_RGB = 255;
+    public static final int BORDERS = 20;
     private BufferedImage bufferedImageOrigin;
     private int width;
     private int height;
@@ -76,9 +78,9 @@ public class FiltersOptions {
                 green = avg + depth;
                 blue = avg - intensity;
 
-                if (red > 255) red = 255;
-                if (green > 255) green = 255;
-                if (blue > 255) blue = 255;
+                if (red > MAX_RGB) red = MAX_RGB;
+                if (green > MAX_RGB) green = MAX_RGB;
+                if (blue > MAX_RGB) blue = MAX_RGB;
                 if (blue < 0) blue = 0;
 
                 color = new Color(red, green, blue);
@@ -120,7 +122,7 @@ public class FiltersOptions {
         int redDiff = Math.abs(color1.getRed() - color2.getRed());
         int greenDiff = Math.abs(color1.getGreen() - color2.getGreen());
         int blueDiff = Math.abs(color1.getBlue() - color2.getBlue());
-        if (redDiff + greenDiff + blueDiff < 20) {
+        if (redDiff + greenDiff + blueDiff < BORDERS) {
             similar = true;
         }
         return similar;
@@ -131,7 +133,7 @@ public class FiltersOptions {
             for (int y = 0; y < this.height; y++) {
                 int currentRgb = this.bufferedImageOrigin.getRGB(x, y);
                 Color color = new Color(currentRgb, true);
-                color = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
+                color = new Color(MAX_RGB - color.getRed(), MAX_RGB - color.getGreen(), MAX_RGB - color.getBlue());
                 this.bufferedImageOrigin.setRGB(x, y, color.getRGB());
             }
         }

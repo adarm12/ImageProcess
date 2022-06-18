@@ -1,5 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.IXOR;
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -24,14 +22,8 @@ public class FilterBoard extends JPanel {
     public FilterBoard(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
-        buttons();
+        details();
         action();
-        this.title = CreateNew.newTitleLibel("Playing With Filters", Main.WINDOW_WIDTH / 2 - TITLE_WIDTH / 2, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
-        this.add(this.title);
-        this.before = CreateNew.newLabel("Before:", IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
-        this.add(this.before);
-        this.after = CreateNew.newLabel("After:", Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
-        this.add(this.after);
         this.imageBefore = new ImageFile().getOriginImage();
         this.imageAfter = new ImageFile().getOriginImage();
         this.background = new ImageIcon("background.png");
@@ -80,7 +72,13 @@ public class FilterBoard extends JPanel {
         thread.start();
     }
 
-    public void buttons() {
+    public void details() {
+        this.title = CreateNew.newTitleLibel("Playing With Filters", Main.WINDOW_WIDTH / 2 - TITLE_WIDTH / 2, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
+        this.add(this.title);
+        this.before = CreateNew.newLabel("Before:", IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
+        this.add(this.before);
+        this.after = CreateNew.newLabel("After:", Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
+        this.add(this.after);
         this.searchTextField = CreateNew.newTextField(Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
         this.add(this.searchTextField);
         this.searchButton = CreateNew.newButton("Search", this.searchTextField.getX() + SEARCH_WIDTH, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
@@ -97,6 +95,8 @@ public class FilterBoard extends JPanel {
         this.add(this.sepia);
         this.negative = CreateNew.newButton("negative", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.sepia.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.negative);
+
+
     }
 
     public void paintComponent(Graphics graphics) {
