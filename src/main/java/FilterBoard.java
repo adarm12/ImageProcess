@@ -28,19 +28,18 @@ public class FilterBoard extends JPanel {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
         buttons();
-        a();
+        action();
         this.imageLabelBefore = new ImageFile().getOriginImage();
         this.imageLabelAfter = new ImageFile().getOriginImage();
 
         this.setVisible(true);
     }
 
-    public void a() {
+    public void action() {
         Thread thread = new Thread(() -> {
-//            while (true) {
-            this.grayscale.addActionListener((event) -> {
+            this.colorShiftRight.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
                 repaint();
                 save();
             });
@@ -50,9 +49,15 @@ public class FilterBoard extends JPanel {
                 repaint();
                 save();
             });
-            this.colorShiftRight.addActionListener((event) -> {
+            this.showBorders.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).showBorders();
+                repaint();
+                save();
+            });
+            this.grayscale.addActionListener((event) -> {
+                this.imageLabelAfter = new ImageFile().getOriginImage();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
                 repaint();
                 save();
             });
@@ -62,7 +67,6 @@ public class FilterBoard extends JPanel {
                 repaint();
                 save();
             });
-//            }
         });
         thread.start();
     }

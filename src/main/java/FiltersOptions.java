@@ -13,6 +13,9 @@ public class FiltersOptions {
         this.bufferedImageOrigin = bufferedImage;
         this.width = this.bufferedImageOrigin.getWidth();
         this.height = this.bufferedImageOrigin.getHeight();
+        System.out.println("before" + width);
+        System.out.println("before HEIGHT" + height);
+
     }
 
     public BufferedImage GrayscaleFilter() {
@@ -83,20 +86,34 @@ public class FiltersOptions {
                 this.bufferedImageOrigin.setRGB(width - x - 1, y, currentColor.getRGB());
             }
         }
+        System.out.println(width);
+        System.out.println(height);
         return this.bufferedImageOrigin;
     }
 
-    public void showBorders() {
+    public BufferedImage showBorders() {
         Color previousPixel = null;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int currentRgb = this.bufferedImageOrigin.getRGB(x, y);
                 Color currentColor = new Color(currentRgb);
-                if (previousPixel != null && !isSimilerColor(previousPixel, currentColor)) {
+                if (previousPixel != null && !isSimilarColor(previousPixel, currentColor)) {
                     this.bufferedImageOrigin.setRGB(x, y, Color.BLACK.getRGB());
                 }
-
+                previousPixel = currentColor;
             }
-
         }
+        return this.bufferedImageOrigin;
     }
+
+    public boolean isSimilarColor(Color color1, Color color2) {
+        boolean similar = false;
+        int redDiff = Math.abs(color1.getRed() - color2.getRed());
+        int greenDiff = Math.abs(color1.getGreen() - color2.getGreen());
+        int blueDiff = Math.abs(color1.getBlue() - color2.getBlue());
+        if (redDiff + greenDiff + blueDiff < 20) {
+            similar = true;
+        }
+        return similar;
+    }
+}
