@@ -3,6 +3,8 @@ import org.jsoup.nodes.Document;
 
 import javax.swing.*;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,7 +22,7 @@ public class FilterBoard extends JPanel {
 
     public static final String WEB = "https://www.facebook.com/oshrikarmni";
 
-    private JLabel imageLabelBefore;
+    private BufferedImage imageLabelBefore;
     private JLabel imageLabelAfter;
     private JTextField searchTextField;
     private JButton searchButton;
@@ -35,7 +37,7 @@ public class FilterBoard extends JPanel {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
         File file1 = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
-        File file2 = new File("\"C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg\"");
+        File file2 = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
 
 //        ImageIcon image = new ImageIcon(file2.getPath());
         this.searchTextField = CreateNew.newTextField(Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
@@ -53,18 +55,22 @@ public class FilterBoard extends JPanel {
         this.sepia = CreateNew.newButton("Sepia", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.eliminateRed.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.sepia);
 
-        ImageIcon image = new ImageIcon("Dora.jpg");
-        imageLabelBefore = new JLabel(image);
-        imageLabelBefore.setBounds(IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
-        this.add(imageLabelBefore);
-        imageLabelAfter = new JLabel(image);
-        imageLabelAfter.setBounds(Main.WINDOW_WIDTH - this.imageLabelBefore.getWidth() - IMAGE_X , IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
-        this.add(imageLabelAfter);
+        this.imageLabelBefore = new BufferedImage();
 
+//        imageLabelBefore = new JLabel(image);
+//        imageLabelBefore.setBounds(IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
+//        this.add(imageLabelBefore);
+//        imageLabelAfter = new JLabel(image);
+//        imageLabelAfter.setBounds(Main.WINDOW_WIDTH - this.imageLabelBefore.getWidth() - IMAGE_X , IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
+//        this.add(imageLabelAfter);
+//
 
         this.setVisible(true);
     }
 
+    public void paintComponent(Graphics graphics) {
+        graphics.drawImage(this.imageLabelBefore.getImage(), IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
+    }
 
     public void web() {
         try {
