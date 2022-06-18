@@ -47,6 +47,7 @@ public class FiltersOptions {
                 Color newColor = new Color(currentGreen, currentBlue, currentRed);
                 bufferedImage.setRGB(x, y, newColor.getRGB());
             }
+
         }
     }
 }
