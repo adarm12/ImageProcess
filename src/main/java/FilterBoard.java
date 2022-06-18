@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class FilterBoard extends JPanel {
 
+    public static final int LABEL_Y = 150, LABEL_WIDTH = 300, LABEL_HEIGHT = 50;
     public static final int TITLE_Y = 20, TITLE_WIDTH = 800, TITLE_HEIGHT = 100;
     public static final int IMAGE_X = 50, IMAGE_Y = 200, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
     public static final int BUTTON_Y = 200, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
@@ -27,9 +28,9 @@ public class FilterBoard extends JPanel {
         action();
         this.title = CreateNew.newTitleLibel("Playing With Filters", Main.WINDOW_WIDTH / 2 - TITLE_WIDTH / 2, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
         this.add(this.title);
-        this.before = CreateNew.newLabel("Before:", IMAGE_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.before = CreateNew.newLabel("Before:", IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
         this.add(this.before);
-        this.after = CreateNew.newLabel("After:", Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X,150, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.after = CreateNew.newLabel("After:", Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
         this.add(this.after);
         this.imageBefore = new ImageFile().getOriginImage();
         this.imageAfter = new ImageFile().getOriginImage();
