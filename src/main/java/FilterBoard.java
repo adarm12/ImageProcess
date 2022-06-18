@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.IXOR;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -5,12 +7,15 @@ import java.awt.image.BufferedImage;
 
 public class FilterBoard extends JPanel {
 
-    public static final int IMAGE_X = 50, IMAGE_Y = 150, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
-    public static final int BUTTON_Y = 150, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
+    public static final int TITLE_Y = 20, TITLE_WIDTH = 800, TITLE_HEIGHT = 100;
+    public static final int IMAGE_X = 50, IMAGE_Y = 200, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
+    public static final int BUTTON_Y = 200, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
     public static final int SEARCH_WIDTH = 150, SEARCH_HEIGHT = 50;
 
+    private JLabel title;
+    private JLabel before, after;
     private ImageIcon background;
-    private BufferedImage imageLabelBefore, imageLabelAfter;
+    private BufferedImage imageBefore, imageAfter;
     private JTextField searchTextField;
     private JButton searchButton;
     private JButton grayscale, colorShiftRight, colorShiftLeft, showBorders, sepia, negative;
@@ -20,8 +25,14 @@ public class FilterBoard extends JPanel {
         this.setLayout(null);
         buttons();
         action();
-        this.imageLabelBefore = new ImageFile().getOriginImage();
-        this.imageLabelAfter = new ImageFile().getOriginImage();
+        this.title = CreateNew.newTitleLibel("Playing With Filters", Main.WINDOW_WIDTH / 2 - TITLE_WIDTH / 2, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT);
+        this.add(this.title);
+        this.before = CreateNew.newLabel("Before:", IMAGE_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.add(this.before);
+        this.after = CreateNew.newLabel("After:", Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X,150, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.add(this.after);
+        this.imageBefore = new ImageFile().getOriginImage();
+        this.imageAfter = new ImageFile().getOriginImage();
         this.background = new ImageIcon("background.png");
         this.setVisible(true);
     }
@@ -29,40 +40,40 @@ public class FilterBoard extends JPanel {
     public void action() {
         Thread thread = new Thread(() -> {
             this.colorShiftRight.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).colorShiftRightFilter();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
             this.colorShiftLeft.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftLeftFilter();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).colorShiftLeftFilter();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
             this.showBorders.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).showBorders();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).showBorders();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
             this.grayscale.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).GrayscaleFilter();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
             this.sepia.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).sepiaFilter();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).sepiaFilter();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
             this.negative.addActionListener((event) -> {
-                this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).negativeFilter();
+                this.imageAfter = new ImageFile().getOriginImage();
+                this.imageAfter = new FiltersOptions(this.imageAfter).negativeFilter();
                 repaint();
-                new ImageFile().saveNewImage(this.imageLabelAfter);
+                new ImageFile().saveNewImage(this.imageAfter);
             });
         });
         thread.start();
@@ -89,8 +100,8 @@ public class FilterBoard extends JPanel {
 
     public void paintComponent(Graphics graphics) {
         graphics.drawImage(this.background.getImage(), 0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT, null);
-        graphics.drawImage(this.imageLabelBefore, IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
-        graphics.drawImage(this.imageLabelAfter, Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
+        graphics.drawImage(this.imageBefore, IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
+        graphics.drawImage(this.imageAfter, Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
     }
 
 }
