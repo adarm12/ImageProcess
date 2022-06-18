@@ -50,4 +50,20 @@ public class FiltersOptions {
 
         }
     }
+
+    public void colorShiftLeftFilter() {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int currentRgb = bufferedImage.getRGB(x, y);
+                Color currentColor = new Color(currentRgb);
+                int currentRed = currentColor.getRed();
+                int currentGreen = currentColor.getGreen();
+                int currentBlue = currentColor.getBlue();
+                Color newColor = new Color(currentBlue, currentRed, currentGreen);
+                bufferedImage.setRGB(x, y, newColor.getRGB());
+            }
+
+        }
+    }
+
 }

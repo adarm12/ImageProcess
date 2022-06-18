@@ -10,17 +10,9 @@ import java.io.IOException;
 
 public class FilterBoard extends JPanel {
 
-    public static final int IMAGE_X = 50;
-    public static final int IMAGE_Y = 100;
-    public static final int IMAGE_WIDTH = 550;
-    public static final int IMAGE_HEIGHT = 650;
-    public static final int BUTTON_Y = 150;
-    public static final int SEARCH_WIDTH = 150;
-    public static final int SEARCH_HEIGHT = 50;
-    public static final int BUTTON_WIDTH = 300;
-    public static final int BUTTON_HEIGHT = 50;
-
-    public static final String WEB = "https://www.facebook.com/oshrikarmni";
+    public static final int IMAGE_X = 50, IMAGE_Y = 100, IMAGE_WIDTH = 550, IMAGE_HEIGHT = 650;
+    public static final int BUTTON_Y = 150, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
+    public static final int SEARCH_WIDTH = 150, SEARCH_HEIGHT = 50;
 
     private BufferedImage imageLabelBefore;
     private JLabel imageLabelAfter;
@@ -39,24 +31,22 @@ public class FilterBoard extends JPanel {
         File file1 = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
         File file2 = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
 
-//        ImageIcon image = new ImageIcon(file2.getPath());
         this.searchTextField = CreateNew.newTextField(Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
         this.add(this.searchTextField);
         this.searchButton = CreateNew.newButton("Search", this.searchTextField.getX() + SEARCH_WIDTH, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
         this.add(this.searchButton);
-        this.colorShiftRight = CreateNew.newButton("Color Shift Right", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.searchTextField.getY() + SEARCH_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.colorShiftRight = CreateNew.newButton("Grayscale", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.searchTextField.getY() + SEARCH_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.colorShiftRight);
-        this.colorShiftLeft = CreateNew.newButton("Color Shift Left", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.colorShiftRight.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.colorShiftLeft = CreateNew.newButton("Color Shift Right", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.colorShiftRight.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.colorShiftLeft);
-        this.showBorders = CreateNew.newButton("Show Borders", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.colorShiftLeft.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.showBorders = CreateNew.newButton("Color Shift Left", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.colorShiftLeft.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.showBorders);
-        this.eliminateRed = CreateNew.newButton("Eliminate Red", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.showBorders.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.eliminateRed = CreateNew.newButton("Show Borders", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.showBorders.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.eliminateRed);
         this.sepia = CreateNew.newButton("Sepia", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.eliminateRed.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.sepia);
 
-        this.imageLabelBefore = new BufferedImage();
-
+        this.imageLabelBefore = new ImageFile().getOriginImage();
 //        imageLabelBefore = new JLabel(image);
 //        imageLabelBefore.setBounds(IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
 //        this.add(imageLabelBefore);
@@ -69,17 +59,7 @@ public class FilterBoard extends JPanel {
     }
 
     public void paintComponent(Graphics graphics) {
-        graphics.drawImage(this.imageLabelBefore.getImage(), IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
-    }
-
-    public void web() {
-        try {
-            Document web = Jsoup.connect(WEB).get();
-            //   Element profileId = web.(contains("jsc_c")).getElementById();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        graphics.drawImage(this.imageLabelBefore, IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
     }
 
 }

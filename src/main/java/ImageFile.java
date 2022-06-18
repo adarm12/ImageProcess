@@ -14,11 +14,7 @@ public class ImageFile {
 //    BufferedImage bufferedImage = ImageIO.read(file);
 
     public ImageFile() {
-        try {
-            this.bufferedImage = ImageIO.read(ORIGINAL_FILE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 //
 //    public BufferedImage outputImage() {
@@ -31,8 +27,12 @@ public class ImageFile {
 //
 //    }
 
-    public ImageIcon getImage() {
-        ImageIcon image = new ImageIcon(ORIGINAL_FILE.getPath());
-        return image;
+    public BufferedImage getOriginImage() {
+        try {
+            this.bufferedImage = ImageIO.read(ORIGINAL_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bufferedImage;
     }
 }
