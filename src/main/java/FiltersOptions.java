@@ -13,9 +13,6 @@ public class FiltersOptions {
         this.bufferedImageOrigin = bufferedImage;
         this.width = this.bufferedImageOrigin.getWidth();
         this.height = this.bufferedImageOrigin.getHeight();
-        System.out.println("before" + width);
-        System.out.println("before HEIGHT" + height);
-
     }
 
     public BufferedImage GrayscaleFilter() {
@@ -86,8 +83,6 @@ public class FiltersOptions {
                 this.bufferedImageOrigin.setRGB(width - x - 1, y, currentColor.getRGB());
             }
         }
-        System.out.println(width);
-        System.out.println(height);
         return this.bufferedImageOrigin;
     }
 
@@ -116,4 +111,18 @@ public class FiltersOptions {
         }
         return similar;
     }
+
+    public BufferedImage negativeFilter() {
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
+                int currentRgb = this.bufferedImageOrigin.getRGB(x, y);
+                Color color = new Color(currentRgb, true);
+                color = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
+                this.bufferedImageOrigin.setRGB(x, y, color.getRGB());
+            }
+        }
+        return this.bufferedImageOrigin;
+    }
+
+
 }

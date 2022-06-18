@@ -68,12 +68,13 @@ public class FilterBoard extends JPanel {
                 save();
             });
         });
+        repaint();
         thread.start();
     }
 
     public void save() {
-//        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
-        File output = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\output.jpg");
+        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
+        //      File output = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\output.jpg");
         try {
             ImageIO.write(imageLabelAfter, "jpg", output);
         } catch (IOException e) {
