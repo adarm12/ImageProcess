@@ -19,7 +19,7 @@ public class FiltersOptions {
         this.height = this.bufferedImage.getHeight();
     }
 
-    public void GrayscaleFilter() {
+    public BufferedImage GrayscaleFilter() {
         this.width = this.bufferedImage.getWidth();
         this.height = this.bufferedImage.getHeight();
 
@@ -33,10 +33,11 @@ public class FiltersOptions {
                 this.bufferedImage.setRGB(j, i, newColor.getRGB());
             }
         }
+        return this.bufferedImage;
     }
 
 
-    public void colorShiftRightFilter() {
+    public void colorShiftLeftFilter() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int currentRgb = bufferedImage.getRGB(x, y);
@@ -51,7 +52,7 @@ public class FiltersOptions {
         }
     }
 
-    public void colorShiftLeftFilter() {
+    public void colorShiftRightFilter() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int currentRgb = bufferedImage.getRGB(x, y);

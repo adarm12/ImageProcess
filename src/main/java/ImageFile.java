@@ -7,36 +7,42 @@ import java.io.IOException;
 
 public class ImageFile {
 
-    File file1 = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
-    File file2 = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
+    public static final File ORIGINAL_FILE = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
+//    public static final File ORIGINAL_FILE =  new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
 
-//    public static final File ORIGINAL_FILE = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
-    public static final File ORIGINAL_FILE =  new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
-    private BufferedImage bufferedImage;
+    public static final File OUTPUT_IMAGE = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
 
+    private BufferedImage bufferedImageBefore;
+    private BufferedImage bufferedImageAfter;
 //    File file = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
 //    BufferedImage bufferedImage = ImageIO.read(file);
 
     public ImageFile() {
-
     }
-//
-//    public BufferedImage outputImage() {
-//        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
-//        try {
-//            ImageIO.write(bufferedImage, "jpg", output);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//    }
 
-    public BufferedImage getOriginImage() {
+    public void outputImage() {
         try {
-            this.bufferedImage = ImageIO.read(ORIGINAL_FILE);
+            ImageIO.write(bufferedImageAfter, "jpg", OUTPUT_IMAGE);
+//            this.bufferedImageAfter = ImageIO.read(outputImage);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+       }
+
+    public BufferedImage getImageAfter() {
+        try {
+            this.bufferedImageAfter = ImageIO.read(OUTPUT_IMAGE);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return bufferedImage;
+        return bufferedImageBefore;
+    }
+    public BufferedImage getOriginImage() {
+        try {
+            this.bufferedImageBefore = ImageIO.read(ORIGINAL_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bufferedImageBefore;
     }
 }
