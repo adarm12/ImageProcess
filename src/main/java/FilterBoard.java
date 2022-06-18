@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class FilterBoard extends JPanel {
 
-
     public static final int IMAGE_X = 50;
     public static final int IMAGE_Y = 100;
     public static final int IMAGE_WIDTH = 550;
