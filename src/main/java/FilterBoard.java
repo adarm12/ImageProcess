@@ -28,8 +28,6 @@ public class FilterBoard extends JPanel {
     public FilterBoard(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
-        File file1 = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
-        File file2 = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
 
         this.searchTextField = CreateNew.newTextField(Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, BUTTON_Y, SEARCH_WIDTH, SEARCH_HEIGHT);
         this.add(this.searchTextField);
@@ -47,10 +45,7 @@ public class FilterBoard extends JPanel {
         this.add(this.sepia);
 
         this.imageLabelBefore = new ImageFile().getOriginImage();
-//        imageLabelBefore = new JLabel(image);
-//        imageLabelBefore.setBounds(IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
-//        this.add(imageLabelBefore);
-//        imageLabelAfter = new JLabel(image);
+//       imageLabelAfter = new JLabel(image);
 //        imageLabelAfter.setBounds(Main.WINDOW_WIDTH - this.imageLabelBefore.getWidth() - IMAGE_X , IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT);
 //        this.add(imageLabelAfter);
 //

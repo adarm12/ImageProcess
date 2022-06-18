@@ -7,6 +7,9 @@ import java.io.IOException;
 
 public class ImageFile {
 
+    File file1 = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
+    File file2 = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\Dora.jpg");
+
     public static final File ORIGINAL_FILE = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\Dora.jpg");
     private BufferedImage bufferedImage;
 
