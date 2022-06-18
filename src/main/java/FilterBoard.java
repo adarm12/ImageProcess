@@ -1,13 +1,7 @@
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class FilterBoard extends JPanel {
 
@@ -15,16 +9,11 @@ public class FilterBoard extends JPanel {
     public static final int BUTTON_Y = 150, BUTTON_WIDTH = 300, BUTTON_HEIGHT = 50;
     public static final int SEARCH_WIDTH = 150, SEARCH_HEIGHT = 50;
 
+    private ImageIcon background;
     private BufferedImage imageLabelBefore, imageLabelAfter;
-
     private JTextField searchTextField;
     private JButton searchButton;
-    private JButton grayscale;
-    private JButton colorShiftRight;
-    private JButton colorShiftLeft;
-    private JButton showBorders;
-    private JButton mirror;
-    private JButton negative;
+    private JButton grayscale, colorShiftRight, colorShiftLeft, showBorders, sepia, negative;
 
     public FilterBoard(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
@@ -33,7 +22,7 @@ public class FilterBoard extends JPanel {
         action();
         this.imageLabelBefore = new ImageFile().getOriginImage();
         this.imageLabelAfter = new ImageFile().getOriginImage();
-
+        this.background = new ImageIcon("background.png");
         this.setVisible(true);
     }
 
@@ -43,51 +32,40 @@ public class FilterBoard extends JPanel {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
                 this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftRightFilter();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
             this.colorShiftLeft.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
                 this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).colorShiftLeftFilter();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
             this.showBorders.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
                 this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).showBorders();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
             this.grayscale.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
                 this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).GrayscaleFilter();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
-            this.mirror.addActionListener((event) -> {
+            this.sepia.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
-                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).mirror();
+                this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).sepiaFilter();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
             this.negative.addActionListener((event) -> {
                 this.imageLabelAfter = new ImageFile().getOriginImage();
                 this.imageLabelAfter = new FiltersOptions(this.imageLabelAfter).negativeFilter();
                 repaint();
-                save();
+                new ImageFile().saveNewImage(this.imageLabelAfter);
             });
         });
-        repaint();
         thread.start();
-    }
-
-    public void save() {
-        File output = new File("C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\dora\\output.jpg");
-        //      File output = new File("C:\\Users\\adarm\\Pictures\\Saved Pictures\\output.jpg");
-        try {
-            ImageIO.write(imageLabelAfter, "jpg", output);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void buttons() {
@@ -103,13 +81,14 @@ public class FilterBoard extends JPanel {
         this.add(this.showBorders);
         this.grayscale = CreateNew.newButton("grayscale", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.showBorders.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.grayscale);
-        this.mirror = CreateNew.newButton("mirror", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
-        this.add(this.mirror);
-        this.negative = CreateNew.newButton("negative", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.mirror.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.sepia = CreateNew.newButton("sepia", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.grayscale.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        this.add(this.sepia);
+        this.negative = CreateNew.newButton("negative", Main.WINDOW_WIDTH / 2 - BUTTON_WIDTH / 2, this.sepia.getY() + BUTTON_HEIGHT * 2, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.add(this.negative);
     }
 
     public void paintComponent(Graphics graphics) {
+        graphics.drawImage(this.background.getImage(), 0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT, null);
         graphics.drawImage(this.imageLabelBefore, IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
         graphics.drawImage(this.imageLabelAfter, Main.WINDOW_WIDTH - IMAGE_WIDTH - IMAGE_X, IMAGE_Y, IMAGE_WIDTH, IMAGE_HEIGHT, null);
     }

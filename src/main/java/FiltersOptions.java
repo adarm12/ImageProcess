@@ -60,16 +60,45 @@ public class FiltersOptions {
         return this.bufferedImageOrigin;
     }
 
-    public BufferedImage mirror() {
+    public BufferedImage sepiaFilter() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int pixel = this.bufferedImageOrigin.getRGB(x, y);
-                Color currentColor = new Color(pixel);
-                this.bufferedImageOrigin.setRGB(width - x - 1, y, currentColor.getRGB());
+                Color color = new Color(pixel, true);
+
+                int red = color.getRed();
+                int green = color.getGreen();
+                int blue = color.getBlue();
+                int avg = (red + green + blue) / 3;
+                int depth = 20;
+                int intensity = 30;
+                red = avg + (depth * 2);
+                green = avg + depth;
+                blue = avg - intensity;
+
+                if (red > 255) red = 255;
+                if (green > 255) green = 255;
+                if (blue > 255) blue = 255;
+                if (blue < 0) blue = 0;
+
+                color = new Color(red, green, blue);
+                this.bufferedImageOrigin.setRGB(x, y, color.getRGB());
             }
         }
         return this.bufferedImageOrigin;
     }
+
+
+//    public BufferedImage mirror() {
+//        for (int x = 0; x < width; x++) {
+//            for (int y = 0; y < height; y++) {
+//                int pixel = this.bufferedImageOrigin.getRGB(x, y);
+//                Color currentColor = new Color(pixel);
+//                this.bufferedImageOrigin.setRGB(width - x - 1, y, currentColor.getRGB());
+//            }
+//        }
+//        return this.bufferedImageOrigin;
+//    }
 
     public BufferedImage showBorders() {
         Color previousPixel = null;
