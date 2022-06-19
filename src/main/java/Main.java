@@ -1,3 +1,6 @@
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import javax.swing.*;
 import java.io.IOException;
 
@@ -13,7 +16,6 @@ public class Main extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setTitle("Image Process By Adar & Shanit");
-
         this.add(new FilterBoard(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT));
 
         this.setVisible(true);

@@ -31,6 +31,11 @@ public class FilterBoard extends JPanel {
     }
 
     public void action() {
+        this.searchButton.addActionListener((event) -> {
+            FaceBookImage faceBookImage = new FaceBookImage();
+            faceBookImage.connectToFaceBook();
+        });
+
         Thread thread = new Thread(() -> {
             this.colorShiftRight.addActionListener((event) -> {
                 this.imageAfter = new ImageFile().getOriginImage();
