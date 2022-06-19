@@ -17,6 +17,7 @@ public class FaceBookImage {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\adarm\\Downloads\\chromedriver_win32 (8)\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("user-data-air=C:\\Users\\adarm\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\n");
+
         this.faceBookDriver = new ChromeDriver(options);
         this.faceBookDriver.get(FaceBookImage.LINK);
         this.faceBookDriver.manage().window().maximize();
